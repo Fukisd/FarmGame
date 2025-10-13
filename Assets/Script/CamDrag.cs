@@ -11,6 +11,7 @@ public class CameraDrag : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             lastMousePos = Input.mousePosition;
+            //Bruh
         }
 
         if (Input.GetMouseButton(0))
