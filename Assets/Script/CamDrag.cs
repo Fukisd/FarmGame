@@ -12,7 +12,7 @@ public class CameraDrag : MonoBehaviour
         {
             lastMousePos = Input.mousePosition;
         }
-
+//bruhhhjakshdkj
         if (Input.GetMouseButton(0))
         {
             Vector3 delta = Input.mousePosition - lastMousePos;
