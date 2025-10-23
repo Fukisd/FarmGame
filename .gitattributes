@@ -1,0 +1,32 @@
+# --- SCRIPT FILES (.cs) ---
+# Cho phép Git merge code C# bình thường
+*.cs text merge=manual diff
+
+# --- UNITY ASSETS / BINARY FILES ---
+# Các loại file này thường gây conflict (không thể merge text)
+# Nên Git sẽ không merge, mà giữ nguyên theo nhánh đang checkout
+*.unity merge=ours
+*.prefab merge=ours
+*.mat merge=ours
+*.asset merge=ours
+*.controller merge=ours
+*.anim merge=ours
+*.meta merge=ours
+*.fbx merge=ours
+*.png merge=ours
+*.jpg merge=ours
+*.tga merge=ours
+*.psd merge=ours
+*.shader merge=ours
+*.ttf merge=ours
+*.wav merge=ours
+*.mp3 merge=ours
+*.ogg merge=ours
+
+# --- SETTINGS FILES ---
+# Không merge ProjectSettings (nếu làm team nhỏ thì nên giữ như này)
+ProjectSettings/* merge=ours
+UserSettings/* merge=ours
+
+# --- Ignore line endings conflicts ---
+* text=auto
