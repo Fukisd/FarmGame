@@ -1,32 +1,35 @@
-# --- SCRIPT FILES (.cs) ---
-# Cho phép Git merge code C# bình thường
-*.cs text merge=manual diff
+# ==============================
+# UNITY SMART MERGE (YAML)
+# ==============================
 
-# --- UNITY ASSETS / BINARY FILES ---
-# Các loại file này thường gây conflict (không thể merge text)
-# Nên Git sẽ không merge, mà giữ nguyên theo nhánh đang checkout
-*.unity merge=ours
-*.prefab merge=ours
-*.mat merge=ours
-*.asset merge=ours
-*.controller merge=ours
-*.anim merge=ours
-*.meta merge=ours
-*.fbx merge=ours
-*.png merge=ours
-*.jpg merge=ours
-*.tga merge=ours
-*.psd merge=ours
-*.shader merge=ours
-*.ttf merge=ours
-*.wav merge=ours
-*.mp3 merge=ours
-*.ogg merge=ours
+# Các file YAML mà Unity có thể merge tự động
+*.unity     merge=unityyamlmerge eol=lf
+*.prefab    merge=unityyamlmerge eol=lf
+*.asset     merge=unityyamlmerge eol=lf
+*.mat       merge=unityyamlmerge eol=lf
+*.anim      merge=unityyamlmerge eol=lf
+*.controller merge=unityyamlmerge eol=lf
 
-# --- SETTINGS FILES ---
-# Không merge ProjectSettings (nếu làm team nhỏ thì nên giữ như này)
+# ==============================
+# CÁC FILE KHÁC
+# ==============================
+
+# Không merge binary (ảnh, âm thanh, model)
+*.png       merge=ours
+*.jpg       merge=ours
+*.jpeg      merge=ours
+*.tga       merge=ours
+*.psd       merge=ours
+*.fbx       merge=ours
+*.wav       merge=ours
+*.mp3       merge=ours
+*.ogg       merge=ours
+
+# Giữ nguyên các file cấu hình cá nhân
 ProjectSettings/* merge=ours
 UserSettings/* merge=ours
 
-# --- Ignore line endings conflicts ---
+# ==============================
+# Xử lý line endings (ngắt dòng)
+# ==============================
 * text=auto
