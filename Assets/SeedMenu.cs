@@ -32,7 +32,7 @@ public class SeedMenu : MonoBehaviour
         currentTile = null;
         menuUI.SetActive(false);
     }
-
+    //bruhhhhuuuu
     public void SelectSeed(int seedIndex)
     {
         if (currentTile == null)
