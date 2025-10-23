@@ -7,7 +7,6 @@ public class DealyedActivation : MonoBehaviour {
 	public float delay;
 	List<Transform> childs;
 
-	// Use this for initialization
 	void Start () {
 
 		childs = new List<Transform> ();
