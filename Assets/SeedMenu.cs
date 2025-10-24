@@ -32,7 +32,6 @@ public class SeedMenu : MonoBehaviour
         currentTile = null;
         menuUI.SetActive(false);
     }
-    //bruhhhhuuuuaa
     public void SelectSeed(int seedIndex)
     {
         if (currentTile == null)
@@ -45,6 +44,5 @@ public class SeedMenu : MonoBehaviour
             currentTile.PlantSeed(seedPrefabs[seedIndex]);
             CloseMenu();
         }
-        //ahhhhhhh
     }
 }

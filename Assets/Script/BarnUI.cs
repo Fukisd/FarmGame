@@ -15,7 +15,6 @@ public class BarnUI : MonoBehaviour
 
     private void Start()
     {
-        // Kiểm tra panel
         if(panel == null)
         {
             Debug.LogError("Panel chưa được gán trong Inspector!");
@@ -24,13 +23,11 @@ public class BarnUI : MonoBehaviour
 
         panel.SetActive(false);
 
-        // Gán sự kiện click cho các hình ảnh
         AddClickListenerSafe(carrotImage, "Carrot");
         AddClickListenerSafe(cornImage, "Corn");
         AddClickListenerSafe(cauliflowerImage, "Cauliflower");
         AddClickListenerSafe(broccoliImage, "Broccoli");
 
-        // Gán sự kiện đóng panel
         if(closeButton != null)
             closeButton.onClick.AddListener(ClosePanel);
         else
@@ -45,7 +42,6 @@ public class BarnUI : MonoBehaviour
             return;
         }
 
-        // Thêm Button nếu chưa có
         Button btn = img.GetComponent<Button>();
         if(btn == null)
         {
