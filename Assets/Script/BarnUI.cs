@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 public class BarnUI : MonoBehaviour
 {
@@ -16,44 +15,71 @@ public class BarnUI : MonoBehaviour
 
     private void Start()
     {
+        // Kiểm tra panel
+        if(panel == null)
+        {
+            Debug.LogError("Panel chưa được gán trong Inspector!");
+            return;
+        }
+
         panel.SetActive(false);
 
-        // Gán sự kiện click cho hình ảnh
-        AddClickListener(carrotImage, () => FeedAnimal("Carrot"));
-        AddClickListener(cornImage, () => FeedAnimal("Corn"));
-        AddClickListener(cauliflowerImage, () => FeedAnimal("Cauliflower"));
-        AddClickListener(broccoliImage, () => FeedAnimal("Broccoli"));
+        // Gán sự kiện click cho các hình ảnh
+        AddClickListenerSafe(carrotImage, "Carrot");
+        AddClickListenerSafe(cornImage, "Corn");
+        AddClickListenerSafe(cauliflowerImage, "Cauliflower");
+        AddClickListenerSafe(broccoliImage, "Broccoli");
 
         // Gán sự kiện đóng panel
-        closeButton.onClick.AddListener(ClosePanel);
+        if(closeButton != null)
+            closeButton.onClick.AddListener(ClosePanel);
+        else
+            Debug.LogError("CloseButton chưa được gán trong Inspector!");
     }
 
-    private void AddClickListener(Image img, UnityEngine.Events.UnityAction action)
+    private void AddClickListenerSafe(Image img, string food)
     {
-        // Đảm bảo hình có component Button hoặc EventTrigger để bắt click
+        if(img == null)
+        {
+            Debug.LogError($"{food} Image chưa được gán trong Inspector!");
+            return;
+        }
+
+        // Thêm Button nếu chưa có
         Button btn = img.GetComponent<Button>();
-        if (btn == null)
+        if(btn == null)
         {
             btn = img.gameObject.AddComponent<Button>();
             btn.transition = Selectable.Transition.None;
         }
-        btn.onClick.AddListener(action);
+
+        btn.onClick.AddListener(() => FeedAnimal(food));
     }
 
     public void OpenPanel(string name)
     {
         barnName = name;
-        panel.SetActive(true);
-        Debug.Log($"Mở chuồng {barnName} thành công!");
+        if(panel != null)
+        {
+            panel.SetActive(true);
+            Debug.Log($"Mở chuồng {barnName} thành công!");
+        }
     }
 
     public void ClosePanel()
     {
-        panel.SetActive(false);
+        if(panel != null)
+            panel.SetActive(false);
     }
 
     private void FeedAnimal(string foodType)
     {
+        if(Warehouse.Instance == null)
+        {
+            Debug.LogError("Warehouse.Instance chưa được khởi tạo!");
+            return;
+        }
+
         if (Warehouse.Instance.RemoveItem(foodType, 1))
         {
             Debug.Log($"{barnName}: Đã cho ăn {foodType}. Còn lại {Warehouse.Instance.GetItemCount(foodType)} trong kho.");
@@ -62,6 +88,7 @@ public class BarnUI : MonoBehaviour
         {
             Debug.Log($"{barnName}: Không đủ {foodType} trong kho!");
         }
+
         ClosePanel();
     }
 }
